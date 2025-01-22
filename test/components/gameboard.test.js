@@ -30,11 +30,13 @@ test("Place ship at 1, 2 vertically", () => {
   }
 });
 test("receiveAttack changes the attacked property of field", () => {
-  gameboard.receiveAttack({x: 1, y: 1})
-  expect(gameboard.board[0][0]["attacked"]).toBe(true)
-})
+  gameboard.receiveAttack({ x: 1, y: 1 });
+  expect(gameboard.board[0][0]["attacked"]).toBe(true);
+});
 test("receiveAttack sinks ship", () => {
-  gameboard.receiveAttack({x: 2, y: 1})
-  gameboard.receiveAttack({x: 3, y: 1})
-  expect(gameboard.board[0][0]["ship"].isSunk()).toBe(true)
-})
+  gameboard.receiveAttack({ x: 2, y: 1 });
+  gameboard.receiveAttack({ x: 3, y: 1 });
+  expect(gameboard.board[0][0]["ship"].isSunk()).toBe(true);
+});
+test("Gameboard counts the amount of ships sunk", () =>
+  expect(gameboard.sunkShips.length).toBe(1));

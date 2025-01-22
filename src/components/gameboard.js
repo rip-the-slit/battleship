@@ -9,8 +9,12 @@ class Gameboard {
     }
     return board;
   })();
+  #sunkShips = [];
   get board() {
     return this.#board;
+  }
+  get sunkShips() {
+    return this.#sunkShips;
   }
   place(ship, position) {
     if (position.startY == position.endY) {
@@ -24,9 +28,13 @@ class Gameboard {
     }
   }
   receiveAttack(position) {
-    const field = this.#board[position.y - 1][position.x - 1]
-    if (field["ship"]) {
-      field["ship"]["hit"]()
+    const field = this.#board[position.y - 1][position.x - 1];
+    const ship = field["ship"]
+    if (ship) {
+      ship.hit();
+      if (ship.isSunk()) {
+        this.#sunkShips.push(field.ship)
+      }
     }
     field["attacked"] = true;
   }
