@@ -23,6 +23,13 @@ class Gameboard {
       }
     }
   }
+  receiveAttack(position) {
+    const field = this.#board[position.y - 1][position.x - 1]
+    if (field["ship"]) {
+      field["ship"]["hit"]()
+    }
+    field["attacked"] = true;
+  }
 }
 
 module.exports = Gameboard;
