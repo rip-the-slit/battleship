@@ -60,3 +60,8 @@ describe("Autoplace method", () => {
     });
   });
 });
+test("Should have method to generate randomn attack coordinates", () => {
+  const coordinates = testPlayer.autoAttack()
+  expect(coordinates).toHaveProperty("x")
+  expect(coordinates).toHaveProperty("y")
+})

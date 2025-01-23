@@ -33,6 +33,12 @@ class Player {
       }
     });
   }
+  autoAttack() {
+    return {
+      x: Math.ceil(Math.random() * 10),
+      y: Math.ceil(Math.random() * 10)
+    }
+  }
 }
 
 module.exports = Player;
