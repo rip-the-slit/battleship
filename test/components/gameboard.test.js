@@ -29,6 +29,10 @@ test("Place ship at 1, 2 vertically", () => {
     expect(gameboard.board[y + 1][0]["ship"]).toBe(testShip);
   }
 });
+test("Place returns if it could place the ship successfully", () => {
+  expect(gameboard.place(testShip, { startX: 1, startY: 2, endX: 1, endY: 4 })).toBe(false)
+  expect(gameboard.place(testShip, { startX: 5, startY: 3, endX: 5, endY: 5 })).toBe(true)
+})
 test("receiveAttack changes the attacked property of field", () => {
   gameboard.receiveAttack({ x: 1, y: 1 });
   expect(gameboard.board[0][0]["attacked"]).toBe(true);

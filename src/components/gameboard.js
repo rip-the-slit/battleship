@@ -17,26 +17,33 @@ class Gameboard {
     return this.#sunkShips;
   }
   place(ship, position) {
+    const coordinates = []
     if (position.startY == position.endY) {
       for (let x = position.startX; x <= position.endX; x++) {
-        this.#board[position.startY - 1][x - 1]["ship"] = ship;
+        const pos = this.#board[position.startY - 1][x - 1]
+        if (pos["ship"]) return false
+        coordinates.push(pos)
       }
     } else {
       for (let y = position.startY; y <= position.endY; y++) {
-        this.#board[y - 1][position.startX - 1]["ship"] = ship;
+        const pos = this.#board[y - 1][position.startX - 1]
+        if (pos["ship"]) return false
+        coordinates.push(pos)
       }
     }
-  }
+    coordinates.forEach((position) => position["ship"] = ship)
+    return true
+  } 
   receiveAttack(position) {
-    const field = this.#board[position.y - 1][position.x - 1];
-    const ship = field["ship"]
+    const coordinates = this.#board[position.y - 1][position.x - 1];
+    const ship = coordinates["ship"]
     if (ship) {
       ship.hit();
       if (ship.isSunk()) {
-        this.#sunkShips.push(field.ship)
+        this.#sunkShips.push(coordinates.ship)
       }
     }
-    field["attacked"] = true;
+    coordinates["attacked"] = true;
   }
 }
 
