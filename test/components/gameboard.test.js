@@ -42,5 +42,9 @@ test("receiveAttack sinks ship", () => {
   gameboard.receiveAttack({ x: 3, y: 1 });
   expect(gameboard.board[0][0]["ship"].isSunk()).toBe(true);
 });
+test("receiveAttack returns boolean indicating if the position wasn't already attacked", () => {
+  expect(gameboard.receiveAttack({ x: 2, y: 1 })).toBe(false)
+  expect(gameboard.receiveAttack({ x: 5, y: 1 })).toBe(true)
+})
 test("Gameboard counts the amount of ships sunk", () =>
   expect(gameboard.sunkShips.length).toBe(1));

@@ -36,6 +36,7 @@ class Gameboard {
   } 
   receiveAttack(position) {
     const coordinates = this.#board[position.y - 1][position.x - 1];
+    if (coordinates.attacked) return false 
     const ship = coordinates["ship"]
     if (ship) {
       ship.hit();
@@ -44,6 +45,7 @@ class Gameboard {
       }
     }
     coordinates["attacked"] = true;
+    return true
   }
 }
 
